@@ -40,8 +40,15 @@ class Settings(BaseSettings):
     cookies: Cookies = Cookies()
 
     media_dir: Path = Path("media")
+
     avatar_dir: Path = media_dir / "avatars"
     avatar_dir_prefix: str = "/media/avatars/"
+
+    video_dir: Path = media_dir / "videos"
+    video_dir_prefix: str = "/media/videos/"
+
+    hls_dir: Path = media_dir / "hls"
+    hls_dir_prefix: str = "/media/hls/"
 
     @property
     def database_url(self) -> str:

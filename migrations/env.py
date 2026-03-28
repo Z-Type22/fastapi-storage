@@ -5,6 +5,7 @@ from sqlalchemy import engine_from_config
 # models
 from src.users.models import User
 from src.auth.models import TokenBlacklist
+from src.videos.models import Video
 
 from alembic import context
 

@@ -5,6 +5,7 @@ from fastapi import UploadFile, HTTPException
 from src.users.models import User
 from src.users.schemas import UserPut
 from src.config import settings
+from pathlib import Path
 import shutil
 
 
@@ -17,6 +18,25 @@ async def set_avatar(
 ):    
     AVATAR_DIR = settings.avatar_dir
     AVATAR_DIR.mkdir(parents=True, exist_ok=True)
+
+    ALLOWED_AVATAR_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
+    ALLOWED_AVATAR_MIME_TYPES = {
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+    }
+
+    if Path(upload_file.filename).suffix.lower() not in ALLOWED_AVATAR_EXTENSIONS:
+        raise HTTPException(
+            status_code=400,
+            detail="Unsupported avatar format"
+        )
+    
+    if upload_file.content_type not in ALLOWED_AVATAR_MIME_TYPES:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid avatar MIME type"
+        )
 
     filename = f"{user.id}_{upload_file.filename}"
     file_path = AVATAR_DIR / filename

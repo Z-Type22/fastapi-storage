@@ -5,6 +5,7 @@ from src.users.models import User
 from src.users.schemas import UserRead
 from src.users.router import router as users_router
 from src.auth.router import router as auth_router
+from src.videos.router import router as videos_router
 from fastapi_csrf_protect import CsrfProtect
 from src.middlewares import CSRFMiddleware
 
@@ -13,10 +14,11 @@ app = FastAPI()
 
 app.add_middleware(CSRFMiddleware)
 
-app.mount("/media", StaticFiles(directory="media"), name="media")
+app.mount("/media/avatars", StaticFiles(directory="media/avatars"), name="media_avatars")
 
 app.include_router(users_router, prefix="/users", tags=["Users"])
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
+app.include_router(videos_router, prefix="/videos", tags=["Audios"])
 
 @app.get("/csrf-token")
 def get_csrf_token(
