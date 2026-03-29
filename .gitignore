@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+*.venv
+venv/
+env/
+ENV/
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# dotenv
+.env
+
+# Certificates
+certs/
+
+# Media/uploads
+media/
+
+# Python package metadata
+build/
+dist/
+*.egg-info/
+*.egg
+
+# IDE / Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Mac / Linux
+.DS_Store
+*.swp
+*~
